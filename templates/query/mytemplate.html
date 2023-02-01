@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            color: white;
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+            font-size: large;
+        }
+
+        pre {
+          font-family: monospace;
+            color: yellow;
+          font-size: inherit;
+          background-color: #333;
+            width: 60%;
+            margin-left: 20%;
+            border-radius: .5rem;
+            word-wrap: break-word;
+            box-decoration-break: clone;
+          padding: .1rem .3rem .2rem;
+
+        }
+        pre[data-lang]::before { content: attr(data-lang); display: block; }
+        pre:hover, pre:focus { width: min-content; }
+
+        /* Code in text */
+        p > code,
+        li > code,
+        dd > code,
+        td > code {
+          background: #ffeff0;
+          word-wrap: break-word;
+          box-decoration-break: clone;
+          padding: .1rem .3rem .2rem;
+          border-radius: .rem;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static 'sdf-min.jpg' %}')">
+<form method="post">
+    {% csrf_token %}
+    <label for="prompt">Enter your prompt:</label>
+    <input type="text" id="prompt" name="prompt">
+
+    <label for="model_choice">Select a model:</label>
+    <select id="model_choice" name="model_choice">
+        <option value="text-davinci-002">GPT-3 (davinci-002)</option>
+        <option value="text-curie-001">GPT-3 (curie-001)</option>
+        <option value="text-babbage-001">GPT-3 (babbage-001)</option>
+        <option value="code-davinci-002">CODEX (davici-002)</option>
+        <option value="code-cushman-001">CODEX (code cushman)</option>
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
+
+{% if generated_text %}
+    <pre>
+   {{ generated_text }}</pre>
+</div>
+    <p>{{ generated_text }}</p>
+
+{% endif %}
+</body>
+</html>
